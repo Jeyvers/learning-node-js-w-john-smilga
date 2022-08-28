@@ -16,3 +16,5 @@ writeFileSync(
 );
 console.log('done with this task');
 console.log('starting the next one');
+
+// Note to understand readStream: if we have a big file, you'll be using all the memory to read the data synchronously, and eventually, you'll get an error that the file is too big and you cannot place everything in the variable.
