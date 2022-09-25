@@ -1,24 +1,32 @@
 const express = require('express');
-const path = require('path');
+const logger = require('./logger');
+const authorize = require('./authorize');
 const app = express();
 
-// This made the css work, how?
-// setup static and middleware
-// create a folder called static or public (common naming convention) and dump all your assets in there. Static files are just files the server doesn't have to change.
-// Use template engines to make things dynamic (server-side rendering)
-app.use(express.static('./public'));
+// req => middleware => res
+// You can stuck a function in between the path and callback function. That function will be the middleware
 
-// Change to static assets index.html
-// onchange, we moved the index.html to public folder, and it becomes the root file
-// app.get('/', (req, res) => {
-//   // Can also use path.join()
-//   res.sendFile(path.resolve(__dirname, './navbar-app/index.html'));
-// });
+// Uses the middleware always
+// Everthing goes in order in Express
+app.use(logger);
+// app.use([logger, authorize]);
 
-app.all('*', (req, res) => {
-  res.status(404).send('resource not found');
+app.get('/', (req, res) => {
+  res.send('Home');
 });
 
-app.listen(5000, () => {
-  console.log('server is listening on port 5000');
+app.get('/about', (req, res) => {
+  res.send('About');
+});
+
+app.get('/api/products', (req, res) => {
+  res.send('Products');
+});
+
+app.get('/api/items', (req, res) => {
+  res.send('Items');
+});
+
+app.listen(5000, (req, res) => {
+  console.log('Server listening on port 5000');
 });
