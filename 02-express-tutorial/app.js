@@ -8,7 +8,7 @@ const app = express();
 // You can stuck a function in between the path and callback function. That function will be the middleware
 
 // Uses the middleware always
-// Everthing goes in order in Express
+// Everything goes in order in Express
 // app.use(authorize);
 
 // 1. use vs route
