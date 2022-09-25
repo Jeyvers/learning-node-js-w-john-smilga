@@ -4,13 +4,8 @@ const authorize = (req, res, next) => {
     req.user = { name: 'john', id: 3 };
     next();
   } else {
-    res.status(401).send('Unathorized');
+    res.status(401).send('Unauthorized');
   }
-
-  console.log('authorize');
-  res.send('authorize');
-  next();
-  //  query string
 };
 
 module.exports = authorize;
