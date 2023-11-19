@@ -1,5 +1,5 @@
 // OS (Operating System) Modules
-const os = require('os');
+const os = require("os");
 
 // info about current user
 const user = os.userInfo();
@@ -13,9 +13,10 @@ const systemUpTimeInHours = systemUpTimeInMinutes / 60;
 
 // Get information about current OS
 const currentOS = {
-  name: os.type(),
-  release: os.release(),
-  totalMem: os.totalmem(),
-  freeMem: os.freemem(),
+ name: os.type(),
+ release: os.release(),
+ totalMem: os.totalmem(),
+ freeMem: os.freemem(),
 };
 // console.log(currentOS);
+// refer to the node documentation for more information on built in modules.
