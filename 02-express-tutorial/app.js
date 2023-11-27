@@ -1,42 +1,36 @@
 const express = require("express");
-const logger = require("./logger");
-const authorize = require("./authorize");
-const morgan = require("morgan");
 const app = express();
+let { people } = require("./data");
 
-// req => middleware => res
-// You can stuck a function in between the path and callback function. That function will be the middleware
+// static assets
+app.use(express.static("./methods-public"));
 
-// Uses the middleware always
-// Everything goes in order in Express
-// app.use(authorize);
+// parse form data
+app.use(express.urlencoded({ extended: false }));
 
-// 1. use vs route
-// 2. options - our own / express / third party
-
-// 2.1. app.use([logger, authorize]);
-// setup static and middleware
-// 2.2 app.use(express.static('./public'));
-// 2.3 e.g morgan npm
-app.use(morgan("tiny"));
-
-// app.use([logger, authorize]);
-
-app.get("/", (req, res) => {
- res.send("Home");
+app.get("/api/people", (req, res) => {
+ res.status(200).json({ success: true, data: people });
 });
 
-app.get("/about", (req, res) => {
- res.send("About");
+app.post("/api/people", (req, res) => {
+ const { name } = req.body;
+ if (!name) {
+  return res
+   .status(400)
+   .json({ success: false, msg: "please provide name value" });
+ }
+ res.status(201).json({ success: true, person: name });
 });
 
-app.get("/api/products", (req, res) => {
- res.send("Products");
-});
+app.post("/login", (req, res) => {
+ const { name } = req.body;
+ if (!name) {
+  return res
+   .status(400)
+   .json({ success: false, msg: "please provide name value" });
+ }
 
-app.get("/api/items", [logger, authorize], (req, res) => {
- console.log(req.user);
- res.send("Items");
+ res.status(201).json({ success: true, person: name });
 });
 
 app.listen(4999, (req, res) => {
