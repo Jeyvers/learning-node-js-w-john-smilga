@@ -6,13 +6,15 @@ let { people } = require("./data");
 app.use(express.static("./methods-public"));
 
 // parse form data with middleware so we can have access to it
-app.use(express.urlencoded({ extended: false }));
+// app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 
 app.get("/api/people", (req, res) => {
  res.status(200).json({ success: true, data: people });
 });
 
 app.post("/api/people", (req, res) => {
+ console.log(req.body);
  const { name } = req.body;
  if (!name) {
   return res

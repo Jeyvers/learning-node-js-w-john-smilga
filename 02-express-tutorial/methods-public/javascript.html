@@ -66,15 +66,15 @@
    btn.addEventListener("click", async (e) => {
     e.preventDefault();
     const nameValue = input.value;
-    console.log(nameValue);
 
     try {
      const { data } = await axios.post("/api/people", { name: nameValue });
+     console.log(data);
      const h5 = document.createElement("h5");
      h5.textContent = data.person;
      result.appendChild(h5);
     } catch (error) {
-     // console.log(error.response)
+     console.log(error.response);
      formAlert.textContent = error.response.data.msg;
     }
     input.value = "";
