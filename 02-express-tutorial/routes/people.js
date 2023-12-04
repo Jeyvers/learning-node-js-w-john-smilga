@@ -9,15 +9,15 @@ const {
 } = require("../controllers/people");
 
 // because of base path // this is the view // flavor one
-router.get("/", getPeople);
+// router.get("/", getPeople);
 
-router.post("/", createPerson);
+// router.post("/", createPerson);
 
-router.post("/postman", createPersonPostman);
+// router.post("/postman", createPersonPostman);
 
-router.put("/:id", updatePerson);
+// router.put("/:id", updatePerson);
 
-router.delete("/:id", deletePerson);
+// router.delete("/:id", deletePerson);
 
 // flavor two
 router.route("/").get(getPeople).post(createPerson);
