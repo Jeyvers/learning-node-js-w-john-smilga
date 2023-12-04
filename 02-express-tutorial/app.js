@@ -5,7 +5,7 @@ let { people } = require("./data");
 // static assets
 app.use(express.static("./methods-public"));
 
-// parse form data
+// parse form data with middleware so we can have access to it
 app.use(express.urlencoded({ extended: false }));
 
 app.get("/api/people", (req, res) => {
@@ -24,13 +24,11 @@ app.post("/api/people", (req, res) => {
 
 app.post("/login", (req, res) => {
  const { name } = req.body;
- if (!name) {
-  return res
-   .status(400)
-   .json({ success: false, msg: "please provide name value" });
+ if (name) {
+  return res.status(200).send(`Welcome ${name}`);
  }
 
- res.status(201).json({ success: true, person: name });
+ res.status(401).send("Please provide credentials");
 });
 
 app.listen(4999, (req, res) => {
